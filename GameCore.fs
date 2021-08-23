@@ -38,6 +38,8 @@ type private Content =
 | MusicAsset of Song
 
 
+
+
 type RunState = {
     elapsed: float
     keyboard: KeyboardInfo
@@ -51,6 +53,7 @@ type RunState = {
     pressed: bool * bool
 }
     
+
 type RunState with
     member __.WasJustPressed key = List.contains key __.keyboard.keysDown
     member __.WasAnyJustPressed keyList = keyList |> List.exists __.WasJustPressed
@@ -185,6 +188,7 @@ type GameLoop<'TModel> (resolution, assetsToLoad, updateModel, getView)
                     let uri = new Uri (path, UriKind.RelativeOrAbsolute)
                     key, Song.FromUri (key, uri) |> MusicAsset)
             |> Map.ofList
+
 
     override __.Update(gameTime) =
         keyboardInfo <- updateKeyboardInfo (Keyboard.GetState()) keyboardInfo

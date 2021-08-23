@@ -6,7 +6,8 @@ type GameModel =
         startTime:float * 
         level:int * 
         maxLevel:int * 
-        currentScore:int
+        currentScore:int *
+        dialogue:string
     | Playing of WorldState
     | Victory of 
         score:int * 

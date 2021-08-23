@@ -4,7 +4,6 @@ open GameCore
 open Model
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework
-open System.IO
 
 let animSpeed = 100.
 let screenWidth, screenHeight = 800, 600
@@ -220,7 +219,6 @@ let getTitleView highScore =
 
 
 let getLoadingView level maxLevel score dialogue =
-
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
@@ -288,8 +286,8 @@ let getView runState =
     function
     | Title highScore ->
         getTitleView highScore
-    | Loading (_, level, max, score) ->
-        getLoadingView level max score
+    | Loading (_, level, max, score, dialogue) ->
+        getLoadingView level max score dialogue
     | Playing worldState ->
         getPlayingView runState worldState
     | Victory (score, isHighScore) ->

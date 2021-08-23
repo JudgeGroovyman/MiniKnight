@@ -102,8 +102,9 @@ let advanceGame (runState : RunState) =
         Title highScore |> Some
     | Some (Title _) when runState.WasJustPressed Keys.Enter ->
         let startingLevel = loadCheckpoint ()
-        Loading (elapsed, startingLevel, maxLevel, 0) |> Some
-    | Some (Loading (t, l, _, score)) when elapsed - t > timeToLoad ->
+        let dialogue = loadDialogue(startingLevel)
+        Loading (elapsed, startingLevel, maxLevel, 0, dialogue) |> Some
+    | Some (Loading (t, l, _, score, dialogue)) when elapsed - t > timeToLoad ->
         getLevelModel levels.[l] l score runState.elapsed |> Some 
     | Some (Playing worldState) when hasReset runState worldState -> 
         Some <| getLevelModel 
@@ -119,8 +120,8 @@ let advanceGame (runState : RunState) =
         Some <| Victory (score, max score highScore)
     | Some (Playing worldState) when hasWarpedOut runState worldState ->
         saveCheckpoint (worldState.level + 1)
-        let levelDialogue = loadDialogue(level)
-        Loading (elapsed, worldState.level + 1, maxLevel, worldState.knight.score, levelDialogue) |> Some
+        let dialogue = loadDialogue(worldState.level + 1)
+        Loading (elapsed, worldState.level + 1, maxLevel, worldState.knight.score, dialogue) |> Some
     | Some (Playing worldState) -> 
         { worldState with events = [] }
         |> KnightController.processKnight runState
