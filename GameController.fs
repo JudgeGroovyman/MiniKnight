@@ -100,8 +100,8 @@ let advanceGame (runState : RunState) =
         if score > highScore then saveHighScore score |> ignore
         Some <| Victory (score, max score highScore)
     | Some (Playing worldState) when hasWarpedOut runState worldState ->
-        let nextLevel = (worldState.level + 1)
-		saveCheckpoint (nextLevel)
+        let nextLevel = (worldState.level +1)
+        saveCheckpoint (nextLevel)
         Loading (elapsed, nextLevel, maxLevel, worldState.knight.score) |> Some
     | Some (Playing worldState) -> 
         { worldState with events = [] }
