@@ -13,6 +13,7 @@ let blockWidth, blockHeight = 40, 40
 let strikeFrames = 2
 let dyingFrames = 5
 let warpTime = 1500.
+let levelText = ""
 
 let assetsToLoad = [
     Font ("default", "Content/coders_crux")
@@ -225,9 +226,8 @@ let getTitleView highScore =
 let loadLevelDialogue () =
     let levelDialogueFile = "./Content/Dialogue/level1.txt"
     if File.Exists levelDialogueFile then
-        let text = File.ReadAllText levelDialogueFile
-        | _ -> 0
-    else " Get Dready!"
+        levelText = File.ReadAllText levelDialogueFile
+    else levelText = " File Doesnt Exist"
 
 
 
