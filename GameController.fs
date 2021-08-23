@@ -60,7 +60,7 @@ let loadHighScore () =
         | _ -> 0
     else 0
 
-let loadCheckpointLevel () =
+let loadCheckpoint () =
     if File.Exists checkpointFile then
         let text = File.ReadAllText checkpointFile
         match System.Int32.TryParse text with
@@ -72,6 +72,10 @@ let loadCheckpointLevel () =
 let saveHighScore score =
     File.WriteAllText (highScoreFile, string score)
 
+let saveCheckpoint level = 
+    File.WriteAllText (highScoreFile, string level)
+
+
 let advanceGame (runState : RunState) =
     let elapsed = runState.elapsed
     function
@@ -80,7 +84,7 @@ let advanceGame (runState : RunState) =
         let highScore = loadHighScore ()
         Title highScore |> Some
     | Some (Title _) when runState.WasJustPressed Keys.Enter ->
-        let startingLevel = loadCheckpointLevel ()
+        let startingLevel = loadCheckpoint ()
         Loading (elapsed, startingLevel, maxLevel, 0) |> Some
     | Some (Loading (t, l, _, score)) when elapsed - t > timeToLoad ->
         getLevelModel levels.[l] l score runState.elapsed |> Some 
