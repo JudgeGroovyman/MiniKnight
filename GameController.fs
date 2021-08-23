@@ -82,8 +82,8 @@ let loadDialogue level =
 
         if File.Exists path then
             File.ReadAllText path
-        else "File Doesnt Exist"
-    else "Path Unknown For This Level"
+        else "Get Ready!"
+    else "You will find a way!"
     
 
 let saveHighScore score =
