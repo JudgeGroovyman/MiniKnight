@@ -4,6 +4,7 @@ open GameCore
 open Model
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework
+open System.IO
 
 let animSpeed = 100.
 let screenWidth, screenHeight = 800, 600
@@ -47,11 +48,6 @@ let assetsToLoad = [
     Song ("titleSong", "./Content/Music/menu.ogg")
     Song ("levelSong", "./Content/Music/Explorer_0.ogg")
     Song ("victorySong", "./Content/Music/victory.ogg")
-    Dialogue (1, "./Content/Dialogue/level1.txt")
-    Dialogue (2, "./Content/Dialogue/level2.txt")
-    Dialogue (3, "./Content/Dialogue/level3.txt")
-    Dialogue (4, "./Content/Dialogue/level4.txt")
-    Dialogue (5, "./Content/Dialogue/level5.txt")
 ]
 
 let resolution = Windowed (screenWidth, screenHeight)
@@ -221,6 +217,19 @@ let getTitleView highScore =
     } |> Seq.toList
 
 
+
+
+
+
+
+let loadLevelDialogue () =
+    let levelDialogueFile = "./Content/Dialogue/level1.txt"
+    if File.Exists levelDialogueFile then
+        let text = File.ReadAllText levelDialogueFile
+        match System.Int32.TryParse text with
+        | true, v -> v
+        | _ -> 0
+    else 0
 
 
 

@@ -14,7 +14,6 @@ type Loadable =
 | Font of key:string * path:string
 | Sound of key:string * path:string
 | Song of key:string * path:string
-| Dialogue of key:int * path:string
 
 type Origin = | TopLeft | Centre
 
@@ -181,7 +180,7 @@ type GameLoop<'TModel> (resolution, assetsToLoad, updateModel, getView)
                     key, SoundEffect.FromStream stream |> SoundAsset
                 | Song (key, path) ->
                     let uri = new Uri (path, UriKind.RelativeOrAbsolute)
-                    key, Song.FromUri (key, uri) |> MusicAsset) 
+                    key, Song.FromUri (key, uri) |> MusicAsset)
             |> Map.ofList
 
     override __.Update(gameTime) =
