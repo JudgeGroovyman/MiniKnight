@@ -13,7 +13,7 @@ let blockWidth, blockHeight = 40, 40
 let strikeFrames = 2
 let dyingFrames = 5
 let warpTime = 1500.
-let levelText = ""
+let levelText = "init"
 
 let assetsToLoad = [
     Font ("default", "Content/coders_crux")
@@ -223,7 +223,7 @@ let getTitleView highScore =
 
 
 
-let loadLevelDialogue () =
+let loadLevelDialogue  =
     let levelDialogueFile = "./Content/Dialogue/level1.txt"
     if File.Exists levelDialogueFile then
         levelText = File.ReadAllText levelDialogueFile
@@ -235,13 +235,15 @@ let loadLevelDialogue () =
 
 
 let getLoadingView level maxLevel score =
+    loadLevelDialogue
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
-        yield Text ("default", " Get Ready!", (screenWidth / 2, screenHeight / 2 + 30), Centre, 1.5, Color.White)
+        yield Text ("default", "Geat Dready!" + levelText, (screenWidth / 2, screenHeight / 2 + 30), Centre, 1.5, Color.White)
         yield MappedImage ("knight", "guardright1", (screenWidth / 2 - 40, screenHeight / 2 + 80, 80, 100), Color.White)
         yield Music "levelSong"
     } |> Seq.toList
+
 
 let getPlayingView runState worldState =
     let elapsed = runState.elapsed
