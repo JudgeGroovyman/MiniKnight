@@ -51,6 +51,14 @@ let assetsToLoad = [
     Song ("victorySong", "./Content/Music/victory.ogg")
 ]
 
+let DialoguePaths = 
+    Map.empty.
+        Add(1, "./Content/Dialogue/level1.txt").
+        Add(2, "./Content/Dialogue/level2.txt").
+        Add(3, "./Content/Dialogue/level3.txt").
+        Add(4, "./Content/Dialogue/level4.txt").
+        Add(5, "./Content/Dialogue/level5.txt");;
+
 let resolution = Windowed (screenWidth, screenHeight)
 let centreX, centreY = (screenWidth / 2) - (blockWidth / 2), (screenHeight / 2) - (blockHeight / 2)
 
@@ -217,19 +225,6 @@ let getTitleView highScore =
         yield MappedImage ("knight", "MiniKnight_25", (screenWidth - 160, screenHeight / 2 + 20, 150, 100), Color.White)
         yield Music "titleSong"
     } |> Seq.toList
-
-
-
-
-let DialoguePaths = 
-    Map.empty.
-        Add(1, "./Content/Dialogue/level1.txt").
-        Add(2, "./Content/Dialogue/level2.txt").
-        Add(3, "./Content/Dialogue/level3.txt").
-        Add(4, "./Content/Dialogue/level4.txt").
-        Add(5, "./Content/Dialogue/level5.txt");;
-
-
 
 let loadDialogue level =
     if DialoguePaths.ContainsKey level then
