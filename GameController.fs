@@ -12,7 +12,6 @@ let checkpointFile = "checkpoint.txt"
 let timeToLoad = 3000.
 let bubbleSpeed = 0.02
 let bubbleHeight = 1.
-let startingLevel = 2
 
 let mapKey = [
     (Color.FromArgb(128, 128, 128), Block)
@@ -81,7 +80,7 @@ let advanceGame (runState : RunState) =
         let highScore = loadHighScore ()
         Title highScore |> Some
     | Some (Title _) when runState.WasJustPressed Keys.Enter ->
-        let loadedStartingLevel = loadCheckpointLevel ()
+        let startingLevel = loadCheckpointLevel ()
         Loading (elapsed, startingLevel, maxLevel, 0) |> Some
     | Some (Loading (t, l, _, score)) when elapsed - t > timeToLoad ->
         getLevelModel levels.[l] l score runState.elapsed |> Some 
