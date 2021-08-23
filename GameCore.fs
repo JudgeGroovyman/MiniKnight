@@ -24,9 +24,11 @@ type ViewArtifact =
 | SoundEffect of string
 | Music of string
 
+
 type Resolution =
 | Windowed of int * int
 | FullScreen of int * int
+
 
 type private Content =
 | TextureAsset of Texture2D
@@ -34,6 +36,7 @@ type private Content =
 | FontAsset of SpriteFont
 | SoundAsset of SoundEffect
 | MusicAsset of Song
+
 
 type RunState = {
     elapsed: float

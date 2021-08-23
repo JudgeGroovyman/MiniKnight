@@ -221,7 +221,7 @@ let getTitleView highScore =
 
 
 
-let Dialogues = 
+let DialoguePaths = 
     Map.empty.
         Add(1, "./Content/Dialogue/level1.txt").
         Add(2, "./Content/Dialogue/level2.txt").
@@ -230,9 +230,10 @@ let Dialogues =
         Add(5, "./Content/Dialogue/level5.txt");;
 
 
+
 let loadDialogue level =
-    if Dialogues.ContainsKey level then
-        let path = Dialogues.Item level
+    if DialoguePaths.ContainsKey level then
+        let path = DialoguePaths.Item level
 
         if File.Exists path then
             File.ReadAllText path
@@ -241,11 +242,11 @@ let loadDialogue level =
 
 
 let getLoadingView level maxLevel score =
-    let leveld = loadDialogue(level)
+    let levelDialogue = loadDialogue(level)
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
-        yield Text ("default", leveld, (screenWidth / 2, screenHeight / 2 + 30), Centre, 0.5, Color.White)
+        yield Text ("default", levelDialogue, (screenWidth / 2, screenHeight / 2 + 30), Centre, 0.5, Color.White)
         yield MappedImage ("knight", "guardright1", (screenWidth / 2 - 40, screenHeight / 2 + 80, 80, 100), Color.White)
         yield Music "levelSong"
     } |> Seq.toList
