@@ -207,6 +207,7 @@ let sounds elapsed =
     | HitSpikes -> 
         SoundEffect "hitSpikes")
 
+
 let getTitleView highScore =
     seq {
         yield Text ("default", "MINIKNIGHT", (screenWidth / 2, screenHeight / 2 - 100), Centre, 2., Color.White)
@@ -223,11 +224,11 @@ let getTitleView highScore =
 
 
 
-let loadLevelDialogue  =
+let loadLevelDialogue () =
     let levelDialogueFile = "./Content/Dialogue/level1.txt"
     if File.Exists levelDialogueFile then
-        levelText = File.ReadAllText levelDialogueFile
-    else levelText = " File Doesnt Exist"
+        File.ReadAllText levelDialogueFile
+    else " File Doesnt Exist"
 
 
 
@@ -235,7 +236,7 @@ let loadLevelDialogue  =
 
 
 let getLoadingView level maxLevel score =
-    loadLevelDialogue
+    loadLevelDialogue 
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
@@ -297,6 +298,7 @@ let getVictoryView score highScore =
         yield MappedImage ("knight", "MiniKnight_27", (screenWidth - 160, screenHeight / 2 + 20, 150, 100), Color.White)
         yield Music "victorySong"
     } |> Seq.toList
+
 
 let getView runState =
     function
