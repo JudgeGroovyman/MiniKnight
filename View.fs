@@ -241,7 +241,7 @@ let loadDialogue level =
 
 
 let getLoadingView level maxLevel score =
-    let leveld = loadDialogue(2)
+    let leveld = loadDialogue(level)
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
