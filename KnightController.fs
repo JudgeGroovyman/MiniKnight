@@ -15,7 +15,7 @@ let killScore = 10
 
 let walkLeftKeys = [Keys.A;Keys.Left]
 let walkRightKeys = [Keys.D;Keys.Right]
-let jumpKeys = [Keys.W;Keys.Space]
+let jumpKeys = [Keys.W;Keys.Space;Keys.Up]
 let strikeKeys = [Keys.LeftControl;Keys.RightControl]
 let blockKeys = [Keys.LeftAlt;Keys.RightAlt]
 
