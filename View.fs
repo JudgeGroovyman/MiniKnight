@@ -51,14 +51,6 @@ let assetsToLoad = [
     Song ("victorySong", "./Content/Music/victory.ogg")
 ]
 
-let DialoguePaths = 
-    Map.empty.
-        Add(1, "./Content/Dialogue/level1.txt").
-        Add(2, "./Content/Dialogue/level2.txt").
-        Add(3, "./Content/Dialogue/level3.txt").
-        Add(4, "./Content/Dialogue/level4.txt").
-        Add(5, "./Content/Dialogue/level5.txt");;
-
 let resolution = Windowed (screenWidth, screenHeight)
 let centreX, centreY = (screenWidth / 2) - (blockWidth / 2), (screenHeight / 2) - (blockHeight / 2)
 
@@ -226,22 +218,13 @@ let getTitleView highScore =
         yield Music "titleSong"
     } |> Seq.toList
 
-let loadDialogue level =
-    if DialoguePaths.ContainsKey level then
-        let path = DialoguePaths.Item level
 
-        if File.Exists path then
-            File.ReadAllText path
-        else "File Doesnt Exist"
-    else "Path Unknown For This Level"
+let getLoadingView level maxLevel score dialogue =
 
-
-let getLoadingView level maxLevel score =
-    let levelDialogue = loadDialogue(level)
     seq {
         yield Text ("default", sprintf "Loading level %i of %i" level maxLevel, (screenWidth / 2, screenHeight / 2 - 80), Centre, 0.6, Color.White)
         yield Text ("default", sprintf "Current Score: %i pts" score, (screenWidth / 2, screenHeight / 2 - 50), Centre, 0.6, Color.White)
-        yield Text ("default", levelDialogue, (screenWidth / 2, screenHeight / 2 + 30), Centre, 0.5, Color.White)
+        yield Text ("default", dialogue, (screenWidth / 2, screenHeight / 2 + 30), Centre, 0.5, Color.White)
         yield MappedImage ("knight", "guardright1", (screenWidth / 2 - 40, screenHeight / 2 + 80, 80, 100), Color.White)
         yield Music "levelSong"
     } |> Seq.toList

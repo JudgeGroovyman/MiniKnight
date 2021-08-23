@@ -13,6 +13,14 @@ let timeToLoad = 3000.
 let bubbleSpeed = 0.02
 let bubbleHeight = 1.
 
+let DialoguePaths = 
+    Map.empty.
+        Add(1, "./Content/Dialogue/level1.txt").
+        Add(2, "./Content/Dialogue/level2.txt").
+        Add(3, "./Content/Dialogue/level3.txt").
+        Add(4, "./Content/Dialogue/level4.txt").
+        Add(5, "./Content/Dialogue/level5.txt");;
+
 let mapKey = [
     (Color.FromArgb(128, 128, 128), Block)
     (Color.FromArgb(255, 0, 0), Spikes)
@@ -68,6 +76,15 @@ let loadCheckpoint () =
         | _ -> 0
     else 0
 
+let loadDialogue level =
+    if DialoguePaths.ContainsKey level then
+        let path = DialoguePaths.Item level
+
+        if File.Exists path then
+            File.ReadAllText path
+        else "File Doesnt Exist"
+    else "Path Unknown For This Level"
+    
 
 let saveHighScore score =
     File.WriteAllText (highScoreFile, string score)
@@ -102,7 +119,8 @@ let advanceGame (runState : RunState) =
         Some <| Victory (score, max score highScore)
     | Some (Playing worldState) when hasWarpedOut runState worldState ->
         saveCheckpoint (worldState.level + 1)
-        Loading (elapsed, worldState.level + 1, maxLevel, worldState.knight.score) |> Some
+        let levelDialogue = loadDialogue(level)
+        Loading (elapsed, worldState.level + 1, maxLevel, worldState.knight.score, levelDialogue) |> Some
     | Some (Playing worldState) -> 
         { worldState with events = [] }
         |> KnightController.processKnight runState
