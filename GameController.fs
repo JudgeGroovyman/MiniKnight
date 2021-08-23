@@ -8,6 +8,7 @@ open System.Drawing
 open System.IO
 
 let highScoreFile = "highscore.txt"
+let checkpointFile = "checkpoint.txt"
 let timeToLoad = 3000.
 let bubbleSpeed = 0.02
 let bubbleHeight = 1.
@@ -60,6 +61,15 @@ let loadHighScore () =
         | _ -> 0
     else 0
 
+let loadCheckpointLevel () =
+    if File.Exists checkpointFile then
+        let text = File.ReadAllText checkpointFile
+        match System.Int32.TryParse text with
+        | true, v -> v
+        | _ -> 0
+    else 0
+
+
 let saveHighScore score =
     File.WriteAllText (highScoreFile, string score)
 
@@ -71,6 +81,7 @@ let advanceGame (runState : RunState) =
         let highScore = loadHighScore ()
         Title highScore |> Some
     | Some (Title _) when runState.WasJustPressed Keys.Enter ->
+        let loadedStartingLevel = loadCheckpointLevel ()
         Loading (elapsed, startingLevel, maxLevel, 0) |> Some
     | Some (Loading (t, l, _, score)) when elapsed - t > timeToLoad ->
         getLevelModel levels.[l] l score runState.elapsed |> Some 
