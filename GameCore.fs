@@ -14,6 +14,7 @@ type Loadable =
 | Font of key:string * path:string
 | Sound of key:string * path:string
 | Song of key:string * path:string
+| Dialogue of key:int * path:string
 
 type Origin = | TopLeft | Centre
 

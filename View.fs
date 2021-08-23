@@ -47,6 +47,11 @@ let assetsToLoad = [
     Song ("titleSong", "./Content/Music/menu.ogg")
     Song ("levelSong", "./Content/Music/Explorer_0.ogg")
     Song ("victorySong", "./Content/Music/victory.ogg")
+    Dialogue (1, "./Content/Dialogue/level1.txt")
+    Dialogue (2, "./Content/Dialogue/level2.txt")
+    Dialogue (3, "./Content/Dialogue/level3.txt")
+    Dialogue (4, "./Content/Dialogue/level4.txt")
+    Dialogue (5, "./Content/Dialogue/level5.txt")
 ]
 
 let resolution = Windowed (screenWidth, screenHeight)
@@ -214,6 +219,13 @@ let getTitleView highScore =
         yield MappedImage ("knight", "MiniKnight_25", (screenWidth - 160, screenHeight / 2 + 20, 150, 100), Color.White)
         yield Music "titleSong"
     } |> Seq.toList
+
+
+
+
+
+
+
 
 let getLoadingView level maxLevel score =
     seq {
