@@ -226,10 +226,8 @@ let loadLevelDialogue () =
     let levelDialogueFile = "./Content/Dialogue/level1.txt"
     if File.Exists levelDialogueFile then
         let text = File.ReadAllText levelDialogueFile
-        match System.Int32.TryParse text with
-        | true, v -> v
         | _ -> 0
-    else 0
+    else " Get Dready!"
 
 
 
