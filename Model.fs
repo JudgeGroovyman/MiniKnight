@@ -100,7 +100,7 @@ let getLevelModel levelMapTiles levelNumber startScore elapsed =
             position = (float x, float y)
             state = Patrolling
             direction = Left
-            health = 3
+            health = 1
         })
         entryPortal = entryPortal
         exitPortal = oneKind ExitPortal (0,0)
