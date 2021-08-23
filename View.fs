@@ -221,19 +221,17 @@ let getTitleView highScore =
 
 
 
-
-type Dialogues = Dialogue of key:int * path:string
-
-let DialoguesToLoad = [
-    Dialogue (1, "./Content/Dialogue/level1.txt")
-    Dialogue (2, "./Content/Dialogue/level2.txt")
-    Dialogue (3, "./Content/Dialogue/level3.txt")
-    Dialogue (4, "./Content/Dialogue/level4.txt")
-    Dialogue (5, "./Content/Dialogue/level5.txt")
-    ]
+let Dialogues = 
+    Map.empty.
+        Add(1, "./Content/Dialogue/level1.txt").
+        Add(2, "./Content/Dialogue/level2.txt").
+        Add(3, "./Content/Dialogue/level3.txt").
+        Add(4, "./Content/Dialogue/level4.txt").
+        Add(5, "./Content/Dialogue/level5.txt");;
 
 
-let loadDialogue path =
+let loadDialogue level =
+	let path = Dialogues.TryFind level
     if File.Exists path then
         File.ReadAllText path
     else "File Doesnt Exist"
