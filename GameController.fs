@@ -73,8 +73,8 @@ let loadCheckpoint () =
         let text = File.ReadAllText checkpointFile
         match System.Int32.TryParse text with
         | true, v -> v
-        | _ -> 0
-    else 0
+        | _ -> 1
+    else 1
 
 let loadDialogue level =
     if DialoguePaths.ContainsKey level then
