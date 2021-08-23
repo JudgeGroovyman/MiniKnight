@@ -73,7 +73,7 @@ let saveHighScore score =
     File.WriteAllText (highScoreFile, string score)
 
 let saveCheckpoint level = 
-    File.WriteAllText (highScoreFile, string level)
+    File.WriteAllText (checkpointFile, string level)
 
 
 let advanceGame (runState : RunState) =
