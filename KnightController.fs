@@ -10,7 +10,7 @@ let jumpSpeed = -0.6
 let gravityStrength = 0.05
 let terminalVelocity = 0.9
 
-let coinScore = 2
+let coinScore = 100
 let killScore = 10
 
 let walkLeftKeys = [Keys.A;Keys.Left]
