@@ -12,6 +12,7 @@ let checkpointFile = "checkpoint.txt"
 let timeToLoad = 3000.
 let bubbleSpeed = 0.02
 let bubbleHeight = 1.
+let maxLevel = 8
 
 let DialoguePaths = 
     Map.empty.
@@ -19,7 +20,10 @@ let DialoguePaths =
         Add(2, "./Content/Dialogue/level2.txt").
         Add(3, "./Content/Dialogue/level3.txt").
         Add(4, "./Content/Dialogue/level4.txt").
-        Add(5, "./Content/Dialogue/level5.txt");;
+        Add(5, "./Content/Dialogue/level5.txt").
+        Add(6, "./Content/Dialogue/level6.txt").
+        Add(7, "./Content/Dialogue/level7.txt").
+        Add(8, "./Content/Dialogue/level8.txt");;
 
 let mapKey = [
     (Color.FromArgb(128, 128, 128), Block)
@@ -38,7 +42,6 @@ let getLevel num =
         | Some t -> Some (x, y, t |> snd)
         | _ -> None)) |> Seq.choose id |> Seq.toList
 
-let maxLevel = 5
 let levels = [1..maxLevel] |> List.map (fun i -> (i, getLevel i)) |> Map.ofList
 
 let hasReset (runState : RunState) worldState = 
